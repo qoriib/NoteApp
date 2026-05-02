@@ -34,6 +34,7 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.sqldelight.android.driver)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -46,7 +47,11 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             
             implementation(libs.sqldelight.runtime)
-            implementation(libs.sqldelight.coroutines.extensions)
+            implementation(libs.sqldelight.coroutines-extensions)
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -54,7 +59,7 @@ kotlin {
         
         val iosMain by getting {
             dependencies {
-                implementation(libs.sqldelight.native-driver)
+                implementation(libs.sqldelight.native.driver)
             }
         }
         
