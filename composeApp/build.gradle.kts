@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -35,6 +36,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.sqldelight.android.driver)
             implementation(libs.koin.android)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -47,11 +49,16 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             
             implementation(libs.sqldelight.runtime)
-            implementation(libs.sqldelight.coroutines-extensions)
+            implementation(libs.sqldelight.coroutines.extensions)
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -60,6 +67,7 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation(libs.sqldelight.native.driver)
+                implementation(libs.ktor.client.darwin)
             }
         }
         

@@ -1,48 +1,36 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# Note App KMP with AI Assistant
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Proyek Note App berbasis Kotlin Multiplatform (KMP) yang mendukung Android dan iOS, dilengkapi dengan fitur Database lokal (SQLDelight), Dependency Injection (Koin), dan integrasi AI (Gemini).
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Fitur Utama
+- **Local Database**: Penyimpanan catatan menggunakan SQLDelight 2.0.1.
+- **Dependency Injection**: Seluruh komponen di-inject menggunakan Koin.
+- **Platform Features**: 
+  - Real-time Network Monitoring (Expect/Actual).
+  - Device Info display (Expect/Actual).
+- **AI Assistant**: Integrasi dengan Gemini AI untuk membantu pengguna (Chatbot).
 
-### Build and Run Android Application
+## Fitur AI: Smart Assistant
+Aplikasi ini memiliki tab **AI Assistant** yang memungkinkan pengguna berinteraksi dengan model AI Gemini 1.5 Flash.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+### Kemampuan AI:
+1. **Chatbot**: Tanya jawab umum terkait catatan atau topik lainnya.
+2. **Context Aware**: Dirancang untuk membantu merapikan tulisan atau meringkas catatan (dapat dikembangkan lebih lanjut).
+3. **Responsif**: Dilengkapi dengan *loading state* dan *proper error handling* jika koneksi terputus atau API error.
 
-### Build and Run Desktop (JVM) Application
+### Cara Konfigurasi AI:
+1. Dapatkan API Key di [Google AI Studio](https://aistudio.google.com/).
+2. Buka file `composeApp/src/commonMain/kotlin/edu/learning/noteapp/di/Koin.kt`.
+3. Ganti `"YOUR_GEMINI_API_KEY"` dengan API Key Anda pada bagian `GeminiService`.
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+## Teknologi yang Digunakan
+- **Compose Multiplatform**: Untuk UI yang konsisten di Android & iOS.
+- **SQLDelight**: Database lokal lintas platform.
+- **Koin**: Dependency Injection.
+- **Ktor**: Networking untuk akses Gemini API.
+- **Kotlinx Serialization**: Untuk parsing data JSON.
 
-### Build and Run iOS Application
-
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
----
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Cara Menjalankan
+1. Pastikan Anda memiliki Android Studio versi terbaru.
+2. Lakukan **Gradle Sync**.
+3. Pilih run configuration `composeApp` untuk Android atau buka folder `iosApp` di Xcode untuk menjalankan iOS.
